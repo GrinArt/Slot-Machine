@@ -4,8 +4,8 @@
 using std::cout;
 using std::endl;
 
-#include <Windows.h>
 #include <conio.h>
 #include <time.h>
+#include <Windows.h>
 
 void chooseFont(int size);

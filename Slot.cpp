@@ -35,7 +35,7 @@ void Slot::GameMenu()
       bet = 0;
 
       CreatingCombinations();
-      PrintSlot();      
+      PrintSlot();
 
       if ( (reels[0] == reels[1]) && (reels[2] == reels[3]) && (reels[1] == reels[2]) && (reels[0] == reels[3]) )
       {
