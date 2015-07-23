@@ -10,10 +10,10 @@ void Slot::startMenu()
   cout << "\n\n\t[1] Game" << endl;
   cout << "\n\t[2] Exit\n\t ";
 
-  while (select < '1' || select > '2') select = _getch();
+  while (select != '1' && select != '2' && select != 27) select = _getch();
 
   if (select == '1') GameMenu();
-  else exit(0);
+  exit(0);
 }
 
 void Slot::GameMenu()
@@ -22,9 +22,12 @@ void Slot::GameMenu()
 
   do
   {
-    if (select == 'a' && bank < 1000) bank += 50;
-    if (select == 72 && bank >= 5) { bet += 5; bank -= 5; }
+    if (select == 'a' && bank <= 950) bank += 50;
+    if (bet < 1000 && select == 72 && bank >= 5) { bet += 5; bank -= 5; }
     if (select == 80 && bet >= 5) { bet -= 5; bank += 5; }
+    if (select == 32 && ((bet + bank) <= 1000) ) { bet += bank; bank = 0; }
+    if (select == 32 && ((bet + bank) > 1000) && bet < 1000 && bank > 50) { bank -= (1000 - bet); bet += (1000 - bet); }
+
 
     stack = bet;
 
@@ -46,7 +49,7 @@ void Slot::GameMenu()
     }
 
     select = -1;
-    while (select != 27 && select != 'a' && select != 72 && select != 80 && select != 13) select = _getch();
+    while (select != 27 && select != 'a' && select != 72 && select != 80 && select != 13 && select != 32) select = _getch();
 
   } while (select != 27);
 
@@ -76,8 +79,8 @@ void Slot::PrintSlot()
 {
   system("cls");
 
-  cout << "     Bet: " << bet << "$        Bank: " << bank << "$" << endl;
-  cout << "__________________________________\n\n\t    ";
+  cout << "     Bet: " << bet << "$\t\tBank: " << bank << "$" << endl;
+  cout << "________________________________________\n\n\t       ";
 
   for (int i = 0; i < 4; i++)
   {
@@ -85,8 +88,8 @@ void Slot::PrintSlot()
     cout << reels[i] << "  ";
   }
 
-  cout << "\n\n\n\n__________________________________";
-  cout << " Add $ |  + |  -   | Start | Exit" << endl;
-  cout << "  [a]  | Up | Down | Enter | Esc" << endl;
-  cout << "_________________________________";
+  cout << "\n\n\n\n________________________________________";
+  cout << " Add $ |  +   |   -    |  Start  | Exit" << endl;
+  cout << "  [a]  | [Up] | [Down] | [Enter] | [Esc]";
+  cout << "_______________________________________";
 }

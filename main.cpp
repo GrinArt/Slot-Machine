@@ -3,7 +3,7 @@
 
 int main()
 {
-  system("mode 34, 12");
+  system("mode 40, 12");
   chooseFont(40);
 
   Slot s;
